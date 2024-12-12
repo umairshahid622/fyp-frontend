@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { Switch } from "./swtich";
+import { MoonIcon, SunIcon } from "../svgIcons";
 
 export default function ThemeToggler() {
   const [mounted, setMounted] = useState(false);
@@ -15,8 +16,13 @@ export default function ThemeToggler() {
 
     if (savedTheme) {
       setTheme(savedTheme);
-    } else {
-      setTheme(`${systemTheme}`);
+      setChecked(savedTheme === "dark");
+    } else if (typeof window !== "undefined") {
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+      setTheme(prefersDark ? "dark" : "light");
+      setChecked(prefersDark);
     }
   }, []);
 
@@ -29,5 +35,14 @@ export default function ThemeToggler() {
 
   if (!mounted) return <>...</>;
 
-  return <Switch checked={checked} setChecked={setChecked} />;
+  return (
+    <Switch
+      checkedIcon={<MoonIcon />}
+      unCheckedIcon={<SunIcon />}
+      checkedBgColor="bg-[#352601]"
+      unCheckedBgColor="bg-sky-700"
+      checked={checked}
+      setChecked={setChecked}
+    />
+  );
 }

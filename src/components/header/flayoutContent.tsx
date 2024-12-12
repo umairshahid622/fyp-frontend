@@ -8,7 +8,7 @@ function FlayoutContent({ content }: { content: MenuItem[] }) {
   };
 
   return (
-    <div className="w-80 pt-4">
+    <div className="w-80">
       {content.map((menuItem, index) => {
         return (
           <motion.div
@@ -16,11 +16,11 @@ function FlayoutContent({ content }: { content: MenuItem[] }) {
             initial="initial"
             animate="initial"
             whileHover="animate"
-            className="flex w-full cursor-pointer items-center justify-between px-3 py-2 hover:bg-gray-300"
+            className="flex w-full cursor-pointer items-center justify-between p-4 hover:bg-gray-300 hover:rounded-lg"
           >
             <div className="text-start">
               <h1>{menuItem.title}</h1>
-              <h2 className="text-sm text-gray-600">{menuItem.subTitle}</h2>
+              <p className="text-sm text-gray-600">{menuItem.subTitle}</p>
             </div>
             <motion.div variants={arrow}>
               <ChevronIcon />

@@ -1,6 +1,4 @@
 "use client";
-
-import Logo from "@/assets/Header/bulb.svg";
 import FlayoutLink from "./flayoutLink";
 import FlayoutContent from "./flayoutContent";
 import { SearchIcon } from "../svgIcons";
@@ -8,6 +6,8 @@ import ThemeToggler from "./themToggler";
 import { AnimatePresence, motion } from "motion/react";
 import MenuButton from "./menuButton";
 import { useEffect, useState } from "react";
+import Button from "../button";
+import Logo from "../logo";
 
 function Header() {
   const [active, setActive] = useState(false);
@@ -43,16 +43,10 @@ function Header() {
   }, [active]);
 
   return (
-    <div>
-      <div className="relative flex items-center justify-between gap-[4vw] bg-white bg-opacity-40 px-4 py-1 text-black">
-        <div className="flex items-center gap-4">
-          <img className="size-14 mix-blend-multiply" src={Logo.src} alt="" />
-          <div className="hidden text-end leading-3 sm:block">
-            <h1 className="text-lg font-medium">Personal AI Educator</h1>
-            <h2>Learn Your Way</h2>
-          </div>
-        </div>
-        <div className="hidden flex-1 items-center gap-10 lg:flex">
+    <div className="fixed top-0 left-0 z-10 w-full bg-white dark:bg-[#808080]">
+      <div className="relative  mx-auto flex items-center justify-between gap-[4vw] px-4 md:px-8 lg:px-16 py-1 text-black">
+        <Logo header />
+        <div className="hidden flex-1 items-center gap-6 lg:flex">
           <FlayoutLink
             name={"Browse"}
             FlayoutContent={<FlayoutContent content={broseMenu} />}
@@ -62,7 +56,7 @@ function Header() {
               <input
                 type="text"
                 id="search"
-                className="block w-full rounded-lg border border-primary p-2.5 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-primary dark:bg-platinum"
+                className="block w-full rounded-lg border  p-2.5 text-sm text-gray-900 focus:outline-none focus:ring-1 focus:ring-green-700 dark:bg-platinum"
                 placeholder="Search..."
                 required
               />
@@ -76,20 +70,13 @@ function Header() {
           </form>
         </div>
         <div className="hidden items-center gap-1 lg:flex">
-          <motion.button
-            type="button"
-            whileTap={{ scale: 0.8 }}
-            className="me-2 rounded-lg border border-gray-700 bg-transparent px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-gray-700"
-          >
+          <Button className="me-2 rounded-lg border border-gray-700 bg-transparent px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-700">
             Login
-          </motion.button>
-          <motion.button
-            type="button"
-            whileTap={{ scale: 0.8 }}
-            className="me-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-white hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-primary"
-          >
+          </Button>
+          <Button className="me-2 rounded-lg bg-green-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-primary">
             Sign Up
-          </motion.button>
+          </Button>
+
           <ThemeToggler />
         </div>
         <MenuButton active={active} setActive={setActive} />

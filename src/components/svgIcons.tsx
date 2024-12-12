@@ -69,7 +69,7 @@ export function MoonIcon() {
 export function SunIcon() {
   return (
     <svg
-      className="h-4 w-4 text-primary"
+      className="h-4 w-4 text-yellow-600"
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       width="24"

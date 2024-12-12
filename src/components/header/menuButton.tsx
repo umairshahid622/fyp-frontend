@@ -16,6 +16,7 @@ function MenuButton({
     openMiddle: {
       opacity: 0,
       backgroundColor: "#D9D9D9",
+      x: 20,
     },
     openBottom: {
       rotate: -45,

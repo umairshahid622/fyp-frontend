@@ -1,11 +1,18 @@
 import { twMerge } from "tailwind-merge";
 import { motion } from "framer-motion";
-import { MoonIcon, SunIcon } from "../svgIcons";
 export const Switch = ({
   checked,
+  checkedIcon,
+  checkedBgColor,
+  unCheckedBgColor,
+  unCheckedIcon,
   setChecked,
 }: {
   checked: boolean;
+  checkedIcon?: JSX.Element;
+  unCheckedIcon?: JSX.Element;
+  checkedBgColor?: string;
+  unCheckedBgColor?: string;
   setChecked: (checked: boolean) => void;
 }) => {
   return (
@@ -14,7 +21,7 @@ export const Switch = ({
         htmlFor="checkbox"
         className={twMerge(
           "relative flex h-7 w-[50px] cursor-pointer items-center rounded-full border border-transparent px-1 shadow-[inset_0px_0px_12px_rgba(0,0,0,0.25)] transition duration-200",
-          !checked ? "bg-sky-700" : "bg-[#352601]",
+          !checked ? checkedBgColor : unCheckedBgColor
         )}
       >
         <motion.div
@@ -33,10 +40,10 @@ export const Switch = ({
           }}
           key={String(checked)}
           className={twMerge(
-            "z-10 flex h-[20px] items-center justify-center rounded-full bg-white text-center",
+            "z-10 flex h-[20px] items-center justify-center rounded-full bg-white text-center"
           )}
         >
-          {!checked ? <SunIcon /> : <MoonIcon />}
+          {checked ? checkedIcon : unCheckedIcon}
         </motion.div>
         <input
           type="checkbox"
