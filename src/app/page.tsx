@@ -1,11 +1,15 @@
 "use client";
+import { useEffect, useState } from "react";
 
-import codeImage from "@/assets/home/image.png";
-import Authentication from "@/components/auth/auth";
+import codeImage from "@/assets/home/Screen Shot (1).png";
+import whiteCodeImage from "@/assets/home/image.png";
 import Button from "@/components/button";
-import Modal from "@/components/modal";
+import { useTheme } from "next-themes";
 
 export default function Home() {
+  const [mounted, setMounted] = useState(false);
+  const { theme } = useTheme();
+
   const courseLinks = [
     "All Recommendation",
     "Adobe Illustrator",
@@ -16,11 +20,20 @@ export default function Home() {
     "Backend Development",
     "Vue JS",
   ];
+
+  useEffect(() => {
+    setMounted(true);
+  });
+
+  if (!mounted) {
+    return null;
+  }
+
   return (
     <>
-      <div className="grid w-full grid-cols-1 gap-3 lg:grid-cols-2">
-        <div className=" space-y-4 flex flex-col  justify-center px-4 md:px-8 lg:px-16 min-h-[calc(100vh-3.8rem)]">
-          <h1 className="text-5xl">Learn something new everyday.</h1>
+      <div className="grid w-full grid-cols-1 gap-3 lg:grid-cols-2 pt-10 h-full">
+        <div className="space-y-4 flex flex-col justify-center px-4 md:px-8 lg:px-16 ">
+          <h1 className="text-6xl lg:text-7xl">Learn something new every day.</h1>
           <p className="text-xl">
             Become professionals and ready to join the world.
           </p>
@@ -31,34 +44,32 @@ export default function Home() {
             >
               Browse Course
             </Button>
-            <Button className="bg-green-700 px-4 py-2 rounded-lg text-white hover:bg-primary border-none ">
+            <Button className="bg-green-700 px-4 py-2 rounded-lg text-white hover:bg-primary border-none">
               Start make your account
             </Button>
           </div>
         </div>
         <div className="flex items-end">
           <img
-            src={codeImage.src}
-            className="rounded-tl-lg min-h-[500px] w-full max-h-[550px] hidden lg:block"
+            src={theme === "dark" ? codeImage.src : whiteCodeImage.src}
+            className="rounded-l-lg  w-full h-[550px] hidden lg:block object-cover"
             alt=""
           />
         </div>
       </div>
+
       <div className="px-4 md:px-8 lg:px-16">
         <div className="flex justify-between flex-wrap py-8 gap-2">
           {courseLinks.map((item, index) => (
             <a
               key={index}
-              className=" text-center  inline-block text-slate-600 grow items-stretch cursor-pointer border border-green-700 dark:border-transparent font-semibold bg-white text-gray-700 px-3 py-2 rounded-lg hover:text-green-700"
+              className="text-center inline-block text-slate-600 grow items-stretch cursor-pointer border border-green-700 dark:border-transparent font-semibold bg-white text-gray-700 px-3 py-2 rounded-lg hover:text-green-700"
             >
               {item}
             </a>
           ))}
         </div>
       </div>
-      <Modal>
-        <Authentication />
-      </Modal>
     </>
   );
 }

@@ -20,7 +20,7 @@ function FlayoutLink({
       onMouseLeave={() => setOpen(() => false)}
       className="relative"
     >
-      <a className="relative flex items-center gap-3  hover:cursor-pointer font-medium">
+      <a className="relative flex items-center gap-3  hover:cursor-pointer font-semibold">
         {name}
 
         {flayoutLink && (
@@ -46,7 +46,7 @@ function FlayoutLink({
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 15 }}
-            style={{ translateX: "10.5%" }}
+            style={{ translateX: "11.4%" }}
             className={`absolute top-[46px] rounded-lg bg-platinum`}
           >
             <div className="absolute -z-10 left-7 top-0 h-5 w-5 -translate-y-1/2 rotate-45 bg-platinum"></div>

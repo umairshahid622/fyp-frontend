@@ -2,10 +2,14 @@ import React, { useState } from "react";
 import Login from "./login/login";
 import SignUp from "./signup/signup";
 
-function Authentication() {
-  const [isLogin, setIsLogin] = useState<boolean>(true);
+function Authentication({ isLoginPage }: { isLoginPage: boolean }) {
+  const [isLogin, setIsLogin] = useState<boolean>(isLoginPage);
 
-  return <div className=" flex h-full">{isLogin ? <Login /> : <SignUp />}</div>;
+  return isLogin ? (
+    <Login setIsLogin={setIsLogin} />
+  ) : (
+    <SignUp setIsLogin={setIsLogin} />
+  );
 }
 
 export default Authentication;

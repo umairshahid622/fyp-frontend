@@ -10,7 +10,6 @@ function MenuButton({
   const lineVariants = {
     openTop: {
       rotate: 45,
-      y: 6.5,
       backgroundColor: "#D9D9D9",
     },
     openMiddle: {
@@ -20,7 +19,6 @@ function MenuButton({
     },
     openBottom: {
       rotate: -45,
-      y: -6.5,
       backgroundColor: "#D9D9D9",
     },
     closedTop: {
@@ -48,46 +46,48 @@ function MenuButton({
   return (
     <motion.button
       onClick={() => setActive((prev) => !prev)}
-      className={`relative z-20 block h-12 w-12 rounded-full border-2 lg:hidden`}
+      className={`relative z-20 h-9 w-9 rounded-full border-2 px-1.5`}
       animate={active ? "open" : "closed"}
       variants={buttonVariants}
       style={{
         borderStyle: "solid",
       }}
     >
-      <motion.span
-        style={{
-          left: "50%",
-          top: "35%",
-          x: "-50%",
-          y: "-50%",
-        }}
-        animate={active ? "openTop" : "closedTop"}
-        variants={lineVariants}
-        className="absolute h-0.5 w-6"
-      />
-      <motion.span
-        style={{
-          left: "50%",
-          top: "50%",
-          x: "-50%",
-          y: "-50%",
-        }}
-        animate={active ? "openMiddle" : "closedMiddle"}
-        variants={lineVariants}
-        className="absolute h-0.5 w-6"
-      />
-      <motion.span
-        style={{
-          left: "50%",
-          top: "65%",
-          x: "-50%",
-          y: "-50%",
-        }}
-        animate={active ? "openBottom" : "closedBottom"}
-        variants={lineVariants}
-        className="absolute h-0.5 w-6"
-      />
+      <div className=" h-full w-full relative ">
+        <motion.span
+          style={{
+            left: "50%",
+            top: active ? "50%" : "35%",
+            x: "-50%",
+            y: "-50%",
+          }}
+          animate={active ? "openTop" : "closedTop"}
+          variants={lineVariants}
+          className="absolute h-0.5 w-full"
+        />
+        <motion.span
+          style={{
+            left: "50%",
+            top: "50%",
+            x: "-50%",
+            y: "-50%",
+          }}
+          animate={active ? "openMiddle" : "closedMiddle"}
+          variants={lineVariants}
+          className="absolute h-0.5 w-full"
+        />
+        <motion.span
+          style={{
+            left: "50%",
+            top: active ? "50%" : "65%",
+            x: "-50%",
+            y: "-50%",
+          }}
+          animate={active ? "openBottom" : "closedBottom"}
+          variants={lineVariants}
+          className="absolute h-0.5 w-full"
+        />
+      </div>
     </motion.button>
   );
 }

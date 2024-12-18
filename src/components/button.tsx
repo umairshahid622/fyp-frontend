@@ -7,7 +7,7 @@ function Button({
   handleClick,
 }: {
   className?: string;
-  children: any;
+  children: React.ReactNode;
   handleClick?: () => void;
 }) {
   return (
@@ -16,7 +16,6 @@ function Button({
       whileTap={{ scale: 0.95 }}
       whileHover={{ scale: 1.05 }}
       className={`font-semibold ${className}`}
-      
       onClick={handleClick}
     >
       {children}

@@ -11,6 +11,7 @@ export default {
     extend: {
       fontFamily: {
         poppins: ["var(--font-poppins)", "sans-serif"],
+        nunitoSans: ["var(--font-para)", "sans-serif"],
       },
       textColor: {
         primary: "#1B4332",

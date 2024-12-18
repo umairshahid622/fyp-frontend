@@ -1,17 +1,18 @@
 import whiteLogo from "@/assets/whiteLogo.png";
 import blackLogo from "@/assets/blackLogo 2.png";
 import { useTheme } from "next-themes";
+import second from '@/components/header/swtich'
 
-function Logo({ header }: { header?: boolean }) {
-  const isHeader: boolean = header !== undefined && header === true;
+function Logo({ black }: { black?: boolean }) {
+  const isBlack: boolean = black !== undefined && black === true;
   const { theme } = useTheme();
 
   return (
-    <div className="flex flex-wrap items-center gap-0 lg:gap-4">
+    <div className="flex flex-wrap items-center">
       <img
-        className="size-14 object-cover"
+        className="size-14 object-cover "
         src={
-          isHeader
+          isBlack
             ? blackLogo.src
             : theme === "dark"
               ? whiteLogo.src
@@ -19,10 +20,10 @@ function Logo({ header }: { header?: boolean }) {
         }
         alt=""
       />
-      <div className="text-end leading-3">
+      <div className="leading-3 ">
         <h1 className="text-lg font-medium">Personal AI Educator</h1>
         <p>Learn Your Way</p>
-      </div>
+      </div>      
     </div>
   );
 }

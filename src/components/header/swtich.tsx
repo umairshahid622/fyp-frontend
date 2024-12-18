@@ -1,58 +1,63 @@
+import { motion } from "motion/react";
 import { twMerge } from "tailwind-merge";
-import { motion } from "framer-motion";
-export const Switch = ({
-  checked,
-  checkedIcon,
-  checkedBgColor,
-  unCheckedBgColor,
-  unCheckedIcon,
-  setChecked,
+
+function swtich({
+  active,
+  size,
+  activeBgColor,
+  inActiveBgColor,
+  activeIcon,
+  inActiveIcon,
+  setActive,
 }: {
-  checked: boolean;
-  checkedIcon?: JSX.Element;
-  unCheckedIcon?: JSX.Element;
-  checkedBgColor?: string;
-  unCheckedBgColor?: string;
-  setChecked: (checked: boolean) => void;
-}) => {
+  active: boolean;
+  size?: number;
+  activeIcon?: JSX.Element;
+  inActiveIcon?: JSX.Element;
+  activeBgColor: string;
+  inActiveBgColor: string;
+  setActive: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
+  const outerBoxWidth = size ? size * 1.78571429 : 50;
+  const outerBoxHeight = size ? size : 28;
+  const innerCircleSize = size ? size * 0.71428571 : 20;
   return (
-    <form className="antialiased">
-      <label
-        htmlFor="checkbox"
+    <div>
+      <div
+        onClick={() => setActive((prev) => !prev)}
+        style={{
+          height: `${outerBoxHeight}px`,
+          width: `${outerBoxWidth}px`,
+        }}
         className={twMerge(
-          "relative flex h-7 w-[50px] cursor-pointer items-center rounded-full border border-transparent px-1 shadow-[inset_0px_0px_12px_rgba(0,0,0,0.25)] transition duration-200",
-          !checked ? checkedBgColor : unCheckedBgColor
+          "relative  flex cursor-pointer items-center rounded-full  px-1 shadow-[inset_0px_0px_12px_rgba(0,0,0,0.25)] transition duration-200",
+          active ? activeBgColor : inActiveBgColor
         )}
       >
         <motion.div
           initial={{
-            width: "20px",
-            x: checked ? 0 : 20,
+            x: active ? 0 : innerCircleSize,
           }}
           animate={{
-            height: "20px",
-            width: "20px",
-            x: checked ? 20 : 0,
+            x: active ? innerCircleSize : 0,
           }}
           transition={{
             duration: 0.3,
-            delay: 0.1,
           }}
-          key={String(checked)}
+          key={String(active)}
+          style={{
+            width: `${innerCircleSize}px`,
+            height: `${innerCircleSize}px`,
+          }}
           className={twMerge(
-            "z-10 flex h-[20px] items-center justify-center rounded-full bg-white text-center"
+            "z-10 flex items-center justify-center rounded-full bg-white text-center"
           )}
         >
-          {checked ? checkedIcon : unCheckedIcon}
+          {active ? activeIcon : inActiveIcon}
         </motion.div>
-        <input
-          type="checkbox"
-          checked={checked}
-          onChange={(e) => setChecked(e.target.checked)}
-          className="hidden"
-          id="checkbox"
-        />
-      </label>
-    </form>
+      </div>
+    </div>
   );
-};
+}
+
+export default swtich;

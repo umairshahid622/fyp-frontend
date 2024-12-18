@@ -2,47 +2,32 @@
 
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
-import { Switch } from "./swtich";
+
 import { MoonIcon, SunIcon } from "../svgIcons";
+import Switch from "./swtich";
 
 export default function ThemeToggler() {
-  const [mounted, setMounted] = useState(false);
-  const [checked, setChecked] = useState(true);
-  const { systemTheme, setTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
+  const [checked, setChecked] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-    const savedTheme = localStorage.getItem("theme");
+    setChecked(theme === "dark");
+  }, [theme]);
 
-    if (savedTheme) {
-      setTheme(savedTheme);
-      setChecked(savedTheme === "dark");
-    } else if (typeof window !== "undefined") {
-      const prefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)"
-      ).matches;
-      setTheme(prefersDark ? "dark" : "light");
-      setChecked(prefersDark);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (!mounted) return;
-    const newTheme = checked ? "dark" : "light";
+  const handleToggle = () => {
+    const newTheme = checked ? "light" : "dark";
     setTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
-  }, [checked, mounted]);
-
-  if (!mounted) return <>...</>;
+    setChecked(!checked);
+  };
 
   return (
     <Switch
-      checkedIcon={<MoonIcon />}
-      unCheckedIcon={<SunIcon />}
-      checkedBgColor="bg-[#352601]"
-      unCheckedBgColor="bg-sky-700"
-      checked={checked}
-      setChecked={setChecked}
+      active={checked}
+      setActive={handleToggle}
+      activeIcon={<MoonIcon />}
+      inActiveIcon={<SunIcon />}
+      activeBgColor="bg-[#352601]"
+      inActiveBgColor="bg-sky-900"
     />
   );
 }
